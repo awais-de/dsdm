@@ -1,12 +1,11 @@
 import pandas as pd
 from googleapiclient.discovery import build
 
-api_key = 'AIzaSyCDYMgkKyBXWOYCSR9BBcIAkKF0TKaWibg'  # Replace with your actual API key
-youtube = build('youtube', 'v3', developerKey=api_key)
-max_results = 500
 
 
-def get_video_links(query, channel_id, max_results=10):
+def get_video_links(api_key, query, channel_id):
+    youtube = build('youtube', 'v3', developerKey=api_key)
+                    
     video_links = []
 
     response = youtube.search().list(
@@ -26,31 +25,32 @@ def get_video_links(query, channel_id, max_results=10):
 
 if __name__ == "__main__":
     
-    columns = ['Country', 'Channel', 'Keyword', 'Video']
+    columns = ['Country', 'Party', 'Keyword', 'Video']
     df_videos = pd.DataFrame(columns=columns)
 
-    df_keywords = pd.read_excel('keywords.xlsx')
+    df_keywords =  pd.read_excel('countries.xlsx',sheet_name='Keywords')
 
-    df_channels = pd.read_excel('countries.xlsx',sheet_name='channels')
+    df_channels = pd.read_excel('countries.xlsx',sheet_name='Channels')
 
     res = []
 
     for index, channel in df_channels.iterrows():
-        for index, query in df_keywords.iterrows():
-
-            links = get_video_links(query.iloc[0], channel['Channel_ID'], max_results)
-            result = []
-            new_row = {
-                'Country': channel['Country'],
-                'Channel': channel['Party'],
-                'Keyword': query.iloc[0],
-                'Video': links
-            }    
-            result.append(new_row)
-            print(result)
-            df_videos = pd.concat([df_videos, pd.DataFrame(result)], ignore_index=True)
+        api_key = channel['API_Key']
+        if api_key != 'NNN' and channel['TODO'] == 'Yes':
+            for index, query in df_keywords.iterrows():
+                links = get_video_links(api_key=api_key, query=query.iloc[0], channel_id=channel['Channel_ID'])
+                result = []
+                new_row = {
+                    'Country': channel['Country'],
+                    'Party': channel['Party'],
+                    'Keyword': query.iloc[0],
+                    'Video': links
+                }    
+                result.append(new_row)
+                print(result)
+                df_videos = pd.concat([df_videos, pd.DataFrame(result)], ignore_index=True)
         
 
 #    print(df_videos.describe())
 
-df_videos.to_excel('output.xlsx')
+df_videos.to_excel('output3.xlsx')
