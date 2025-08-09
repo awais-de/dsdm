@@ -184,13 +184,13 @@ def generate_visualizations(df_comments, df_videos, directory='Results/Reports')
 
 if __name__ == "__main__":
     
-    datafilename = 'countries.xlsx'
+    datafilename = 'data_files.xlsx'
     df_file_names = pd.read_excel(datafilename)
 
     file_names_list = df_file_names.iloc[:, 0].tolist()
 
-    df_videos = pd.read_excel(file_names_list[0])
-    df_comments = pd.read_excel(file_names_list[1])
+    df_comments = pd.read_excel(file_names_list[0])
+    df_videos = pd.read_excel(file_names_list[1])
 
 
     create_reports_folder('.')
