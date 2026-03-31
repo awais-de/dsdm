@@ -4,7 +4,7 @@ This repository contains the code, data, and documentation for the research proj
 
 This project was developed as part of a research initiative.
 
-- **Last Updated**: 10:15 PM CEST, Saturday, August 09, 2025
+- **Last Updated**: April 01, 2026
 
 ---
 
@@ -36,9 +36,8 @@ The study examines how political actors use YouTube to communicate sustainabilit
 
 ```
 ├── Data/
-│   ├── comments_output_final.xlsx
-│   ├── output_final.xlsx
-│   └── ~$comments_output_final.xlsx
+│   ├── comments_output_final_*.xlsx
+│   └── output_final_*.xlsx
 ├── Results/
 │   ├── Reports/
 │   │   ├── 01_Videos_Summary_By_Country_Party.xlsx
@@ -49,8 +48,7 @@ The study examines how political actors use YouTube to communicate sustainabilit
 │   │   ├── 06_01_like_count_distribution_by_keyword.png
 │   │   ├── 06_02_view_count_distribution_by_keyword.png
 │   │   ├── 07_sentiment_distribution_by_keyword.png
-│   │   ├── 08_sentiment_comparison_by_party_for_each_keyword.png
-│   │   └── .DS_Store
+│   │   └── 08_sentiment_comparison_by_party_for_each_keyword.png
 ├── .gitignore
 ├── analysis.py
 ├── countries.xlsx
@@ -71,8 +69,8 @@ The study examines how political actors use YouTube to communicate sustainabilit
 ### Installation
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/<your-username>/<your-repo-name>.git
-   cd <your-repo-name>
+   git clone https://github.com/muhammadawais/dsdm.git
+   cd dsdm
    ```
 
 2. **Install Dependencies**:
@@ -101,8 +99,8 @@ python data_gathering.py
 ```
 - **Input**: `countries.xlsx` (keywords and channel information)
 - **Output**:
-  - `Data/output_final.xlsx`: Video metadata
-  - `Data/comments_output_final.xlsx`: Comment data with sentiment scores
+   - `Data/output_final_*.xlsx`: Video metadata
+   - `Data/comments_output_final_*.xlsx`: Comment data with sentiment scores
   - `data_files.xlsx`: File paths for the above outputs
 - **Note**: The script handles API quota limits by saving partial data if the limit is exceeded. Ensure a valid API key is provided.
 
@@ -111,7 +109,7 @@ Run the `analysis.py` script to process the data and generate visualizations:
 ```bash
 python analysis.py
 ```
-- **Input**: `data_files.xlsx`, `output_final.xlsx`, `comments_output_final.xlsx`
+- **Input**: `data_files.xlsx`, `Data/output_final_*.xlsx`, `Data/comments_output_final_*.xlsx`
 - **Output**: Excel files and PNG visualizations saved in `Results/Reports/`
 - **Visualizations**:
   - Video summaries by country and party
@@ -156,7 +154,7 @@ python analysis.py
 ---
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is intended to be released under the MIT License.
 
 ---
 
